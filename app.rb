@@ -1,11 +1,11 @@
-require 'cgi'
+require 'uri'
 require_relative 'time_service'
 
 class App
   def call(env)
     case env['REQUEST_PATH']
     when '/time'
-      cities = self.prepare_cities env['QUERY_STRING']
+      cities = self.prepare_cities env['REQUEST_URI']
       result = TimeService.get(cities)
 
       if result
@@ -18,17 +18,8 @@ class App
     end
   end
 
-  def prepare_cities query
-    parsed_query = CGI.parse(query)
-    key = parsed_query.keys.first
-
-    raw_cities = 
-      if key == 'cities'
-        parsed_query[key].first
-      else
-        key
-      end
-
-    raw_cities.to_s.split(',').map { |city| city }
+  def prepare_cities uri
+    parsed_query = URI.parse(uri).query
+    URI.decode(parsed_query.to_s).to_s.split(',').map { |city| city }
   end
 end

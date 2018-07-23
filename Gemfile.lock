@@ -1,13 +1,17 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    geokit (1.13.1)
     rack (2.0.5)
+    timezone (1.2.12)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  geokit
   rack (~> 2.0.1)
+  timezone
 
 BUNDLED WITH
    1.16.1
