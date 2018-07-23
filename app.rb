@@ -16,6 +16,8 @@ class App
     else
       ['200', {'Content-Type' => 'text/plain'}, ['OK']]
     end
+  rescue StandardError => e
+    ['500', {'Content-Type' => 'text/plain'}, ['Internal server error']]
   end
 
   def prepare_cities uri
