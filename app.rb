@@ -1,5 +1,6 @@
 require 'uri'
 require_relative 'time_service'
+Dir['controllers/*.rb'].each { |file| require_relative file }
 
 # Main class of interaction of application logic and web-server
 class App
@@ -11,7 +12,8 @@ class App
     else
       HomeController.new(env).index
     end
-  rescue StandardError
+  rescue StandardError => e
+    puts e.message
     ['500', { 'Content-Type' => 'text/plain' }, ['Internal server error']]
   end
 end

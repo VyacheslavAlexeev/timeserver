@@ -22,7 +22,7 @@ host = options[:host] || DEFAULT_HOST
 port = options[:port] || DEFAULT_PORT
 
 server = TCPServer.new(host, port)
-puts "Server started on #{server.host}:#{server.port}"
+puts "Server started on #{host}:#{port}"
 
 app = App.new
 

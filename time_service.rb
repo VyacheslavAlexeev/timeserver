@@ -35,14 +35,14 @@ class TimeService
     city = city.downcase.tr(' ', '_')
     timezone = get_city_tz city
 
-    timezone.time Time.now if timezone.present?
+    timezone.time Time.now unless timezone.nil?
   end
 
   def self.get_city_tz(city)
     cached_tz = find_tz_in_cache(city)
 
     timezone =
-      if cached_tz.present?
+      unless cached_tz.nil?
         Timezone.fetch cached_tz.delete("\n")
       else
         get_tz_by_coords(city)
@@ -53,7 +53,7 @@ class TimeService
 
   def self.get_tz_by_coords(city)
     coords = get_city_coords(city)
-    if coords.present?
+    unless coords.nil?
       timezone = Timezone.lookup(*coords)
       write_tz_to_cache city, timezone.name if timezone.valid?
     end
@@ -71,8 +71,10 @@ class TimeService
 
     File.open(@cache_filename, 'rb').each do |line|
       result = line.split(',')
-      result[1] unless result[0].to_s.casecmp city.to_s.downcase
+      return result[1] unless result[0].to_s.casecmp city.to_s.downcase
     end
+
+    nil
   end
 
   def self.write_tz_to_cache(city, timezone)
