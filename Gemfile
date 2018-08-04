@@ -1,5 +1,6 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem 'rack', '~> 2.0.1'
 gem 'geokit'
+gem 'rack', '~> 2.0.1'
+gem 'rubocop', require: false
 gem 'timezone'

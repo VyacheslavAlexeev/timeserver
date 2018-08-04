@@ -1,27 +1,17 @@
 require 'uri'
 require_relative 'time_service'
 
+# Main class of interaction of application logic and web-server
 class App
+  # The class contains routing logic, calling of controllers and errors handling
   def call(env)
     case env['REQUEST_PATH']
     when '/time'
-      cities = self.prepare_cities env['REQUEST_URI']
-      result = TimeService.get(cities)
-
-      if result
-        ['200', {'Content-Type' => 'text/plain'}, [result.join("\n")]]
-      else
-        ['400', {'Content-Type' => 'text/plain'}, ['Bad request']]
-      end
+      TimeController.new(env).index
     else
-      ['200', {'Content-Type' => 'text/plain'}, ['OK']]
+      HomeController.new(env).index
     end
-  rescue StandardError => e
-    ['500', {'Content-Type' => 'text/plain'}, ['Internal server error']]
-  end
-
-  def prepare_cities uri
-    parsed_query = URI.parse(uri).query
-    URI.decode(parsed_query.to_s).to_s.split(',').map { |city| city }
+  rescue StandardError
+    ['500', { 'Content-Type' => 'text/plain' }, ['Internal server error']]
   end
 end
