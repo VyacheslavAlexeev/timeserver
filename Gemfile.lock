@@ -4,12 +4,14 @@ GEM
     ast (2.4.0)
     geokit (1.13.1)
     jaro_winkler (1.5.1)
+    minitest (5.11.3)
     parallel (1.12.1)
     parser (2.5.1.2)
       ast (~> 2.4.0)
     powerpack (0.1.2)
     rack (2.0.5)
     rainbow (3.0.0)
+    rake (12.3.1)
     rubocop (0.58.2)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -19,7 +21,10 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.9.0)
+    thread_safe (0.3.6)
     timezone (1.2.12)
+    tzinfo (1.2.5)
+      thread_safe (~> 0.1)
     unicode-display_width (1.4.0)
 
 PLATFORMS
@@ -27,9 +32,12 @@ PLATFORMS
 
 DEPENDENCIES
   geokit
+  minitest
   rack (~> 2.0.1)
+  rake
   rubocop
   timezone
+  tzinfo
 
 BUNDLED WITH
    1.16.1
