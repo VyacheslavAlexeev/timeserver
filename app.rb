@@ -13,7 +13,7 @@ class App
       HomeController.new(env).index
     end
   rescue StandardError => e
-    puts e.message
+    print detail.backtrace.join("\n")
     ['500', { 'Content-Type' => 'text/plain' }, ['Internal server error']]
   end
 end

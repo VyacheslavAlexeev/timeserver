@@ -52,7 +52,7 @@ class TimeService
   end
 
   def self.get_tz_by_coords(city)
-    coords = get_city_coords(city)
+    coords = get_city_coords("#{city} city")
     unless coords.nil?
       timezone = Timezone.lookup(*coords)
       write_tz_to_cache city, timezone.name if timezone.valid?
