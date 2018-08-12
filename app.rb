@@ -1,4 +1,5 @@
 require 'uri'
+require 'dotenv/load'
 require_relative 'lib/time_service'
 Dir['controllers/*.rb'].each { |file| require_relative file }
 

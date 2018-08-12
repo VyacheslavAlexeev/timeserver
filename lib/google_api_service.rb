@@ -7,7 +7,7 @@ require 'timezone'
 class GoogleApiService
   def initialize
     # left the key here for a quick check
-    @google_api_key = '***REMOVED***'
+    @google_api_key = ENV['GOOGLE_API_KEY']
     Geokit::Geocoders::GoogleGeocoder.api_key = @google_api_key
 
     Timezone::Lookup.config(:google) do |c|
